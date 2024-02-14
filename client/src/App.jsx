@@ -1,21 +1,37 @@
+import { Dashboard } from "./pages/Dashboard";
+import { Home } from "./pages/Home";
+import { Jobs } from "./pages/Jobs";
+import { Profile } from "./pages/Profile";
 import { AppLayout } from "./ui/AppLayout";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/app",
+    element: <AppLayout />,
+    children: [
+      {
+        path: "home",
+        element: <Home />,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "myjobs",
+        element: <Jobs />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              <AppLayout />
-            </div>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

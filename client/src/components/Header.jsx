@@ -1,11 +1,16 @@
+/* eslint-disable react/prop-types */
 import { HiUserCircle } from "react-icons/hi2";
 import { HiMiniArrowRightOnRectangle } from "react-icons/hi2";
+import { Sidebar } from "./Sidebar";
 
-export const Header = () => {
+export const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
   return (
-    <div className="navbar bg-base-100 border-b-[1px] border-slate-800 relative h-[40px]">
+    <div className="navbar bg-base-100 border-b-[1px] border-slate-800 fixed top-0 left-0 h-[40px] mb-[40px]">
       <div className="flex-none">
-        <button className="btn btn-square btn-ghost">
+        <button
+          className="btn btn-square btn-ghost"
+          onClick={() => setIsSideBarOpen((currState) => !currState)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -22,7 +27,7 @@ export const Header = () => {
         </button>
       </div>
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">CareerSync</a>
       </div>
       <div className="flex text-2xl sm:gap-5 gap-4 sm:pr-11 pr-2">
         <button className="">
@@ -32,6 +37,7 @@ export const Header = () => {
           <HiMiniArrowRightOnRectangle />
         </button>
       </div>
+      {isSideBarOpen && <Sidebar />}
     </div>
   );
 };
