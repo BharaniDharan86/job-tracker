@@ -1,7 +1,21 @@
-import React from "react";
+import { AppLayout } from "./ui/AppLayout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
-  return <div>App</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <AppLayout />
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
