@@ -37,7 +37,10 @@ export const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
           <HiMiniArrowRightOnRectangle />
         </button>
       </div>
-      {isSideBarOpen && <Sidebar />}
+      <Sidebar
+        isSideBarOpen={isSideBarOpen}
+        setIsSideBarOpen={setIsSideBarOpen}
+      />
     </div>
   );
 };

@@ -1,39 +1,52 @@
-import React from "react";
+import { HiEye } from "react-icons/hi2";
 
 export const JobTable = () => {
   return (
-    <div className="overflow-x-auto">
-      <table className="table table-zebra">
+    <div className="overflow-x-auto z-0 ">
+      <table className="table z-[-10] table-zebra ">
         {/* head */}
-        <thead>
+        <thead className="bg-[#1e293b] uppercase text-slate-200 py-2 text-sm">
           <tr>
-            <th>Company </th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Company Name</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Location</th>
+            <th>Date Applied</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="tracking-wide capitalize py-4">
           {/* row 1 */}
           <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
+            <th>Tata consultanct services</th>
+            <td>full stack developer</td>
+            <td>pending</td>
+            <td>chennai</td>
+            <td>15-02-2024</td>
+            <td>
+              <HiEye />
+            </td>
           </tr>
           {/* row 2 */}
           <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
+            <th>Tata consultanct services</th>
+            <td>full stack developer</td>
+            <td>pending</td>
+            <td>chennai</td>
+            <td>15-02-2024</td>
+            <td>
+              <HiEye />
+            </td>
           </tr>
-          {/* row 3 */}
           <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
+            <th>Tata consultanct services</th>
+            <td>full stack developer</td>
+            <td>pending</td>
+            <td>chennai</td>
+            <td>15-02-2024</td>
+            <td>
+              <HiEye />
+            </td>
           </tr>
         </tbody>
       </table>
