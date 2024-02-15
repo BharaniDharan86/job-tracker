@@ -8,7 +8,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
         isSideBarOpen ? "translate-x-[0]" : "translate-x-[-100%]"
       }  left-0 top-[64px] z-50 h-screen w-full transition-all duration-300`}
     >
-      <ul className="text-lg py-3  h-screen font-semibold w-[200px]  bg-slate-900 border-r-2 border-slate-800">
+      <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-slate-900 border-r-2 border-slate-800">
         <li className="mb-3 p-2 hover:bg-slate-800 w-[100%] transition-all duration-400 hover:translate-x-1">
           <NavLink to="/home" className="flex items-center gap-4 gap-y-3">
             <HiMiniHome /> Home

@@ -1,3 +1,4 @@
+import { JobForm } from "./features/jobs/JobForm";
 import { Dashboard } from "./pages/Dashboard";
 import { Home } from "./pages/Home";
 import { Jobs } from "./pages/Jobs";
@@ -6,6 +7,10 @@ import { AppLayout } from "./ui/AppLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <JobForm />,
+  },
   {
     path: "/app",
     element: <AppLayout />,

@@ -2,7 +2,7 @@ import { HiEye } from "react-icons/hi2";
 
 export const JobTable = () => {
   return (
-    <div className="overflow-x-auto z-0 ">
+    <div className="overflow-x-auto z-0 px-4">
       <table className="table z-[-10] table-zebra ">
         {/* head */}
         <thead className="bg-[#1e293b] uppercase text-slate-200 py-2 text-sm">
