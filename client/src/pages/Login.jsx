@@ -1,11 +1,21 @@
+import { useState } from "react";
 import { Button } from "../ui/Button";
 import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 export const Login = () => {
+  const { handleSubmit, register, formState } = useForm();
+
+  const { errors } = formState;
+
+  function submit(data) {
+    console.log(data);
+  }
+
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
       <h1 className="font-bold text-2xl p-3">Welcome Back</h1>
-      <form className="w-[30%]">
+      <form className="w-[30%]" onSubmit={handleSubmit(submit)}>
         <label className="input input-bordered flex items-center gap-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +26,17 @@ export const Login = () => {
             <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
-          <input type="text" className="grow" placeholder="Email" />
+          <input
+            type="text"
+            className="grow"
+            placeholder="Email"
+            {...register("email", {
+              required: "This Field Can't be Empty",
+            })}
+          />
+          {errors?.email && (
+            <p className="text-red-600">{errors.email.message}</p>
+          )}
         </label>
 
         <label className="input input-bordered flex items-center gap-2 mb-3">
@@ -32,7 +52,17 @@ export const Login = () => {
               clipRule="evenodd"
             />
           </svg>
-          <input type="password" className="grow" placeholder="Password" />
+          <input
+            type="password"
+            className="grow"
+            placeholder="Password"
+            {...register("password", {
+              required: "This Field Can't be Empty",
+            })}
+          />
+          {errors?.email && (
+            <p className="text-red-600">{errors.password.message}</p>
+          )}
         </label>
 
         <Button type="full">Login</Button>
@@ -41,7 +71,7 @@ export const Login = () => {
       <div className="p-3 text-lg font-medium">
         <p>
           New to CareerSync ?{" "}
-          <NavLink to="/signup" className="underline">
+          <NavLink to="/signup" className="underline ml-1">
             Sign Up Now
           </NavLink>{" "}
         </p>
