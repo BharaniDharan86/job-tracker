@@ -1,4 +1,5 @@
 export const verifyEmail = async function (body) {
+  console.log(body);
   const response = await fetch(
     "http://localhost:3000/api/v1/users/verifyemail",
     {
@@ -6,7 +7,8 @@ export const verifyEmail = async function (body) {
       headers: {
         "Content-Type": "application/json",
       },
-      body,
+      body: JSON.stringify(body),
+      credentials: true,
     }
   );
 
@@ -21,12 +23,29 @@ export const signUp = async function (otp) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: {
-      otp,
-    },
+    body: JSON.stringify(otp),
+    credentials: true,
   });
 
   const data = await response.json();
+
+  return data;
+};
+
+export const login = async function (userData) {
+  console.log(userData);
+  const response = await fetch("http://localhost:3000/api/v1/users/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+    credentials: "include",
+  });
+
+  const data = await response.json();
+
+  console.log(data);
 
   return data;
 };

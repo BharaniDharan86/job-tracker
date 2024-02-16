@@ -1,15 +1,23 @@
-import { useState } from "react";
 import { Button } from "../ui/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../services/apiAuth";
 
 export const Login = () => {
   const { handleSubmit, register, formState } = useForm();
+  const navigate = useNavigate();
+  const { mutate, isPending, data } = useMutation({
+    mutationFn: (data) => login(data),
+    onSuccess: () => {
+      navigate("/app/myjobs");
+    },
+  });
 
   const { errors } = formState;
 
   function submit(data) {
-    console.log(data);
+    mutate(data);
   }
 
   return (

@@ -15,12 +15,14 @@ exports.verifyEmail = async (req, res, next) => {
     let otp = generateOtp();
     otp = otp.toString();
 
-    await Otp.create({
+    const isOtp = await Otp.create({
       email,
       password,
       username,
       otp,
     });
+
+    console.log(isOtp);
 
     await sendMail({
       email,
@@ -58,11 +60,17 @@ exports.signUp = async (req, res, next) => {
 
     const token = createToken(newUser._id);
 
-    return res.cookie("access_token", token).status(200).json({
-      status: "success",
-      success: true,
-      message: "Signed Up Successfully !!",
-    });
+    return res
+      .cookie("access_token", token, {
+        withCredentials: true,
+        httpOnly: false,
+      })
+      .status(200)
+      .json({
+        status: "success",
+        success: true,
+        message: "Signed Up Successfully !!",
+      });
   } catch (error) {
     return res.status(400).json({
       status: "failed",
@@ -89,11 +97,18 @@ exports.login = async (req, res, next) => {
 
     const token = createToken(currUser._id);
 
-    return res.cookie("access_token", token).status(200).json({
-      status: "success",
-      success: true,
-      message: "Logged in Successfully !!",
-    });
+    return res
+      .cookie("access_token", token, {
+        // httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      })
+      .status(200)
+      .json({
+        status: "success",
+        success: true,
+        message: "Logged in Successfully !!",
+      });
   } catch (error) {
     return res.status(400).json({
       status: "failed",

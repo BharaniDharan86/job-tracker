@@ -13,6 +13,7 @@ export const AppLayout = () => {
           setIsSideBarOpen={setIsSideBarOpen}
         />
       </div>
+
       <div className="mt-[60px]">
         <Outlet />
       </div>

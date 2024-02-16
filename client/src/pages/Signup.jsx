@@ -1,15 +1,34 @@
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { verifyEmail } from "../services/apiAuth";
 
 export default function Signup() {
   const { register, formState, handleSubmit, getValues } = useForm();
 
   const { errors } = formState;
+  const navigate = useNavigate();
+
+  const { mutate, error, isPending } = useMutation({
+    mutationFn: (body) => verifyEmail(body),
+    onSuccess: () => {
+      navigate("/signup");
+    },
+    onError: () => {
+      alert("There was an unknown error take a look at the console");
+    },
+  });
 
   function submit(data) {
     console.log(data);
+    mutate(data);
   }
+
+  if (error) {
+    alert(error);
+  }
+
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
       <h1 className="font-bold text-2xl p-3">Create Your Account</h1>
@@ -118,7 +137,9 @@ export default function Signup() {
             <p className="text-red-600">{errors.confirmpassword.message}</p>
           )}
         </label>
-        <Button type="full">Sign Up</Button>
+        <Button type="full" disabled={isPending}>
+          Sign Up
+        </Button>
       </form>
       <div className="p-3 text-lg font-medium">
         <p>

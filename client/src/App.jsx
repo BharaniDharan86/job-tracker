@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { JobForm } from "./features/jobs/JobForm";
 import { Dashboard } from "./pages/Dashboard";
 import { Home } from "./pages/Home";
 import { JobDetail } from "./pages/JobDetail";
@@ -11,15 +10,21 @@ import Signup from "./pages/Signup";
 import VerifyEmail from "./pages/VerifyEmail";
 import { AppLayout } from "./ui/AppLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ProtectedRoute } from "./pages/ProtectedRoute";
+import { CookiesProvider } from "react-cookie";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <JobForm />,
+    element: <p>Home Page</p>,
   },
   {
     path: "/app",
-    element: <AppLayout />,
+    element: (
+      <ProtectedRoute>
+        <AppLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "home",
@@ -48,11 +53,11 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/signup",
+    path: "/verifyemail",
     element: <Signup />,
   },
   {
-    path: "/verifyemail",
+    path: "/signup",
     element: <VerifyEmail />,
   },
 ]);
@@ -67,12 +72,12 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <>
+    <CookiesProvider>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />;
+        <RouterProvider router={router} />
         <ReactQueryDevtools />
       </QueryClientProvider>
-    </>
+    </CookiesProvider>
   );
 }
 
