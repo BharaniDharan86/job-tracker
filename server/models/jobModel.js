@@ -20,6 +20,10 @@ const jobSchema = new mongoose.Schema({
   salary: String,
   appliedplatform: String,
   notes: String,
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+  },
 });
 
 const Job = mongoose.model("Job", jobSchema);

@@ -3,12 +3,33 @@ const Otp = require("../models/otpModel");
 const generateOtp = require("../utils/generateOtp");
 const sendMail = require("../utils/email");
 const createToken = require("../utils/createJwtToken");
+const { promisify } = require("util");
+const jwt = require("jsonwebtoken");
 
 exports.protect = async (req, res, next) => {
   //check the presence of the token if not they are not logged in
-  console.log(req.headers);
 
-  //verify the token
+  if (
+    !req.headers.authorization ||
+    !req.headers.authorization.startsWith("Bearer")
+  ) {
+    throw new Error("You're not logged in");
+  }
+
+  const access_token = req.headers.authorization.split(" ")[1];
+
+  const decoded = await promisify(jwt.verify)(
+    access_token,
+    process.env.JWT_SECRET
+  );
+
+  if (!decoded) throw new Error("Invalid Token Please Sign in Again");
+
+  const currUser = await User.findById(decoded.id);
+
+  if (!currUser) throw new Error("Your are not valid user please login again");
+
+  req.user = currUser;
 
   next();
 };
