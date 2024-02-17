@@ -2,21 +2,30 @@ import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import "react-datepicker/dist/react-datepicker.css";
+import { createJob } from "../../services/apiJobs";
+import { useCookies } from "react-cookie";
 
 export const JobForm = () => {
   const { register, handleSubmit, formState } = useForm();
   const [startDate, setStartDate] = useState(new Date());
-
+  const [employmenttype, setEmploymentType] = useState("Full Time");
   const { errors } = formState;
+  const [cookies] = useCookies();
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (jobs) => createJob(jobs, cookies.access_token),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["jobs"],
+      });
+    },
+  });
 
   function submitForm(data) {
-    console.log(data);
-  }
-
-  function errorOnSubmit() {
-    console.log("There was an error");
+    const jobData = { ...data, dateapplied: startDate, employmenttype };
+    mutate(jobData);
   }
 
   return (
@@ -24,7 +33,7 @@ export const JobForm = () => {
       <h1 className="text-center text-2xl font-bold">Add a New Job Post</h1>
       <form
         className="w-full bg-slate-800 px-10"
-        onSubmit={handleSubmit(submitForm, errorOnSubmit)}
+        onSubmit={handleSubmit(submitForm)}
       >
         <label className="form-control w-full ">
           <div className="label mb-[-3px]">
@@ -97,11 +106,16 @@ export const JobForm = () => {
           <div className="label mb-[-3px]">
             <span className="label-text">Employment Type</span>
           </div>
-          <select className="select select-bordered text-lg">
-            <option disabled selected>
-              Pick one
-            </option>
-            <option>Full Time</option>
+          <select
+            className="select select-bordered text-lg"
+            value={employmenttype}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setEmploymentType(e.target.value);
+            }}
+          >
+            <option disabled>Pick one</option>
+            <option selected>Full Time</option>
             <option>Part Time</option>
             <option>Internship</option>
             <option>Remote</option>

@@ -52,7 +52,6 @@ exports.getJobByUser = async (req, res, next) => {
   try {
     const jobs = await Job.find({ user: userId });
     if (!jobs) throw new Error("Invalid Job Id");
-
     return res.status(200).json({
       status: "success",
       success: true,

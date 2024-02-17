@@ -1,53 +1,16 @@
-import { HiEye } from "react-icons/hi2";
+/* eslint-disable react/prop-types */
+import TableHead from "../../components/TableHead";
+import TableRow from "../../components/TableRow";
 
-export const JobTable = () => {
+export const JobTable = ({ jobs }) => {
   return (
     <div className="overflow-x-auto z-0 px-4">
       <table className="table z-[-10] table-zebra ">
-        {/* head */}
-        <thead className="bg-[#1e293b] uppercase text-slate-200 py-2 text-sm">
-          <tr>
-            <th>Company Name</th>
-            <th>Position</th>
-            <th>Status</th>
-            <th>Location</th>
-            <th>Date Applied</th>
-            <th></th>
-          </tr>
-        </thead>
+        <TableHead />
         <tbody className="tracking-wide capitalize py-4">
-          {/* row 1 */}
-          <tr>
-            <th>Tata consultanct services</th>
-            <td>full stack developer</td>
-            <td>pending</td>
-            <td>chennai</td>
-            <td>15-02-2024</td>
-            <td>
-              <HiEye />
-            </td>
-          </tr>
-          {/* row 2 */}
-          <tr>
-            <th>Tata consultanct services</th>
-            <td>full stack developer</td>
-            <td>pending</td>
-            <td>chennai</td>
-            <td>15-02-2024</td>
-            <td>
-              <HiEye />
-            </td>
-          </tr>
-          <tr>
-            <th>Tata consultanct services</th>
-            <td>full stack developer</td>
-            <td>pending</td>
-            <td>chennai</td>
-            <td>15-02-2024</td>
-            <td>
-              <HiEye />
-            </td>
-          </tr>
+          {jobs.map((job) => {
+            return <TableRow key={job._id} job={job} />;
+          })}
         </tbody>
       </table>
     </div>
