@@ -12,17 +12,12 @@ export const JobHeader = () => {
       <div className="flex justify-end mb-4 px-3 gap-3 font-medium text-white">
         <select className="select select-bordered w-full max-w-xs text-lg">
           <option disabled selected>
-            Sort By
-          </option>
-          <option>Date Applied</option>
-          <option>Platform</option>
-        </select>
-        <select className="select select-bordered w-full max-w-xs text-lg">
-          <option disabled selected>
             Filter By
           </option>
-          <option>Han Solo</option>
-          <option>Greedo</option>
+          <option>Pending</option>
+          <option>Rejected</option>
+          <option>Interviewed</option>
+          <option>Offered</option>
         </select>
         <Modal.Open name="job-form">
           <Button>Add a New Job</Button>

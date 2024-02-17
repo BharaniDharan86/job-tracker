@@ -50,7 +50,12 @@ exports.getJobByUser = async (req, res, next) => {
   const userId = req.user._id;
 
   try {
-    const jobs = await Job.find({ user: userId });
+    let query = Job.find({ user: userId });
+
+    // query = query.filter({ status: "Pending" });
+
+    const jobs = await query.sort("dateapplied");
+
     if (!jobs) throw new Error("Invalid Job Id");
     return res.status(200).json({
       status: "success",
