@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export const JobForm = () => {
   const { register, handleSubmit, formState } = useForm();
+  const [startDate, setStartDate] = useState(new Date());
 
   const { errors } = formState;
 
@@ -14,22 +19,20 @@ export const JobForm = () => {
     console.log("There was an error");
   }
 
-  console.log(errors);
-
   return (
-    <div className="h-[600px] flex border-3 border-red-3 bg-slate-800 flex-col justify-center items-center uppercase w-[680px] font-semibold ">
+    <div className="h-[700px] flex border-3 border-red-3 bg-slate-800 flex-col justify-center items-center uppercase w-[680px] font-semibold ">
       <h1 className="text-center text-2xl font-bold">Add a New Job Post</h1>
       <form
-        className="w-full bg-slate-800 px-10 py-2"
+        className="w-full bg-slate-800 px-10"
         onSubmit={handleSubmit(submitForm, errorOnSubmit)}
       >
         <label className="form-control w-full ">
-          <div className="label">
+          <div className="label mb-[-3px]">
             <span className="label-text">Company Name</span>
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-bordered input-md w-full "
             {...register("companyname", {
               required: "This field can't be empty",
             })}
@@ -41,7 +44,7 @@ export const JobForm = () => {
           )}
         </label>
         <label className="form-control w-full ">
-          <div className="label">
+          <div className="label mb-[-3px]">
             <span className="label-text">Job Title</span>
           </div>
           <input
@@ -58,7 +61,23 @@ export const JobForm = () => {
           )}
         </label>
         <label className="form-control w-full ">
-          <div className="label">
+          <div className="label mb-[-3px]">
+            <span className="label-text">Date Applied</span>
+          </div>
+          <DatePicker
+            className="input input-bordered w-full "
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+          />
+
+          {errors?.jobtitle?.message && (
+            <p className="font-semibold capitalize text-red-600">
+              {errors.jobtitle.message}
+            </p>
+          )}
+        </label>
+        <label className="form-control w-full ">
+          <div className="label mb-[-3px]">
             <span className="label-text">Location</span>
           </div>
           <input
@@ -75,7 +94,22 @@ export const JobForm = () => {
           )}
         </label>
         <label className="form-control w-full ">
-          <div className="label">
+          <div className="label mb-[-3px]">
+            <span className="label-text">Employment Type</span>
+          </div>
+          <select className="select select-bordered text-lg">
+            <option disabled selected>
+              Pick one
+            </option>
+            <option>Full Time</option>
+            <option>Part Time</option>
+            <option>Internship</option>
+            <option>Remote</option>
+            <option>Freelance</option>
+          </select>
+        </label>
+        <label className="form-control w-full ">
+          <div className="label mb-[-3px]">
             <span className="label-text">Salary</span>
           </div>
           <input
@@ -92,7 +126,7 @@ export const JobForm = () => {
           )}
         </label>
         <label className="form-control w-full ">
-          <div className="label">
+          <div className="label mb-[-3px]">
             <span className="label-text">Applied Platform</span>
           </div>
           <input

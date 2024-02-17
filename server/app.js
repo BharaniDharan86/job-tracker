@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
+
+const userRouter = require("./routes/userRouter");
+const jobRouter = require("./routes/jobRouter");
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -11,11 +14,9 @@ app.use(
   })
 );
 app.use(morgan("dev"));
-// app.use(cookieParser());
 
 app.use(express.json(""));
 
-const userRouter = require("./routes/userRouter");
-
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/jobs", jobRouter);
 module.exports = app;

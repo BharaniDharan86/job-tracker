@@ -4,6 +4,15 @@ const generateOtp = require("../utils/generateOtp");
 const sendMail = require("../utils/email");
 const createToken = require("../utils/createJwtToken");
 
+exports.protect = async (req, res, next) => {
+  //check the presence of the token if not they are not logged in
+  console.log(req.headers);
+
+  //verify the token
+
+  next();
+};
+
 exports.verifyEmail = async (req, res, next) => {
   const { email, password, username } = req.body;
 
@@ -15,14 +24,12 @@ exports.verifyEmail = async (req, res, next) => {
     let otp = generateOtp();
     otp = otp.toString();
 
-    const isOtp = await Otp.create({
+    await Otp.create({
       email,
       password,
       username,
       otp,
     });
-
-    console.log(isOtp);
 
     await sendMail({
       email,
@@ -108,6 +115,7 @@ exports.login = async (req, res, next) => {
         status: "success",
         success: true,
         message: "Logged in Successfully !!",
+        token,
       });
   } catch (error) {
     return res.status(400).json({
