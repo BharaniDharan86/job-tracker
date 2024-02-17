@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 import { HiMiniCalendarDays, HiMiniHome, HiShoppingBag } from "react-icons/hi2";
 import { HiMiniUserCircle } from "react-icons/hi2";
@@ -5,7 +7,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
   return (
     <div
       className={` absolute ${
-        isSideBarOpen ? "translate-x-[0]" : "translate-x-[-100%]"
+        isSideBarOpen ? "translate-x-[0]" : "translate-x-[-200%]"
       }  left-0 top-[64px] z-50 h-screen w-full transition-all duration-300`}
     >
       <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-slate-900 border-r-2 border-slate-800">

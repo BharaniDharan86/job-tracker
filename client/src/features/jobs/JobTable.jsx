@@ -5,7 +5,7 @@ import TableRow from "../../components/TableRow";
 export const JobTable = ({ jobs }) => {
   return (
     <div className="overflow-x-auto z-0 px-4">
-      <table className="table z-[-10] table-zebra ">
+      <table className="table  table-zebra ">
         <TableHead />
         <tbody className="tracking-wide capitalize py-4">
           {jobs.map((job) => {
