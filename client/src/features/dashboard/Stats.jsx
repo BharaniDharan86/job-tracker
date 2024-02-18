@@ -1,7 +1,4 @@
-import { useCookies } from "react-cookie";
-import { useQuery } from "@tanstack/react-query";
-import { getJobStats } from "../services/apiJobs";
-import Loader from "../ui/Loader";
+/* eslint-disable react/prop-types */
 
 const style = {
   Pending: "text-warning",
@@ -10,15 +7,7 @@ const style = {
   Interviewed: "text-primary",
 };
 
-const Stats = () => {
-  const [cookie] = useCookies();
-  const { isLoading, data } = useQuery({
-    queryKey: ["stats"],
-    queryFn: () => getJobStats(cookie.access_token),
-  });
-
-  if (isLoading) return <Loader />;
-
+const Stats = ({ data }) => {
   const { totalApplications, query } = data;
 
   return (

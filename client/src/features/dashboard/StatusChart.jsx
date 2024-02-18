@@ -1,30 +1,30 @@
+/* eslint-disable react/prop-types */
 import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 
-const StatusChart = () => {
-  const data = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 },
-  ];
-
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const StatusChart = ({ data }) => {
+  const { query } = data;
+  const style = {
+    Pending: "#0088FE",
+    Rejected: "#00C49F",
+    Offered: "#FFBB28",
+    Interviewed: "#FF8042",
+  };
 
   return (
     <>
       <PieChart width={800} height={400}>
         <Pie
-          data={data}
+          data={query}
           cx="40%"
           cy={200}
           innerRadius={80}
           outerRadius={120}
           fill="#8884d8"
           paddingAngle={2}
-          dataKey="value"
+          dataKey="nums"
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          {query.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={style[entry._id]} />
           ))}
         </Pie>
         <Legend
@@ -37,6 +37,13 @@ const StatusChart = () => {
         />
         <Tooltip />
       </PieChart>
+      <ul>
+        {query.map((entry, index) => (
+          <li key={`legend-${index}`} style={{ color: style[entry._id] }}>
+            {entry._id}
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

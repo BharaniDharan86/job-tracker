@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import TableHead from "../../components/TableHead";
-import TableRow from "../../components/TableRow";
+import TableHead from "./TableHead";
+import TableRow from "./TableRow";
 
 export const JobTable = ({ jobs }) => {
   return (
