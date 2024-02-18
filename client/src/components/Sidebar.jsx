@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import { HiMiniCalendarDays, HiMiniHome, HiShoppingBag } from "react-icons/hi2";
+import {
+  HiBriefcase,
+  HiMiniCalendarDays,
+  HiMiniHome,
+  HiShoppingBag,
+} from "react-icons/hi2";
+import { HiMiniBriefcase } from "react-icons/hi2";
+
 import { HiMiniUserCircle } from "react-icons/hi2";
 export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
   return (
@@ -21,7 +28,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
             to="/app/myjobs"
             className="flex items-center gap-4 row-gap-4"
           >
-            <HiShoppingBag />
+            <HiMiniBriefcase />
             My Jobs
           </NavLink>
         </li>

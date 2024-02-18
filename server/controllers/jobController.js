@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 // create job
+const { default: mongoose } = require("mongoose");
 const Job = require("../models/jobModel");
 
 exports.createJob = async (req, res, next) => {
@@ -50,9 +52,7 @@ exports.getJobByUser = async (req, res, next) => {
   const userId = req.user._id;
 
   try {
-    let query = Job.find({ user: userId });
-
-    // query = query.filter({ status: "Pending" });
+    const query = Job.find({ user: userId });
 
     const jobs = await query.sort("dateapplied");
 
@@ -96,6 +96,41 @@ exports.updateStatus = async (req, res, next) => {
       success: false,
       message: error.message,
     });
+  }
+};
+
+//stats
+
+exports.jobStats = async (req, res, next) => {
+  const userId = new mongoose.Types.ObjectId(req.user._id);
+
+  try {
+    const query = await Job.aggregate([
+      {
+        $match: {
+          user: userId,
+        },
+      },
+      {
+        $group: {
+          _id: "$status",
+          nums: {
+            $sum: 1,
+          },
+        },
+      },
+    ]);
+
+    const totalApplications = query.reduce((acc, curr) => {
+      return (acc += curr.nums);
+    }, 0);
+
+    return res.status(200).json({
+      totalApplications,
+      query,
+    });
+  } catch (err) {
+    console.log(err);
   }
 };
 

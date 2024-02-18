@@ -4,15 +4,15 @@ import { getJobById } from "../services/apiJobs";
 import { useCookies } from "react-cookie";
 import Loader from "../ui/Loader";
 import { Button } from "../ui/Button";
+import Select from "../ui/Select";
 export const JobDetail = () => {
   const { id } = useParams();
   const [cookies] = useCookies();
-  const naviget = useNavigate();
+  const navigate = useNavigate();
 
-  console.log(id, cookies.access_token);
   // make an api call and get the data
   const { data, isLoading } = useQuery({
-    queryKey: ["job", id],
+    queryKey: ["job-detail"],
     queryFn: () => getJobById(id, cookies.access_token),
   });
 
@@ -57,11 +57,12 @@ export const JobDetail = () => {
           <h2>{dateapplied}</h2>
           <span className="font-medium text-lg ">{salary}</span>
         </div>
+        <Select id={id} value={status} />
       </div>
 
-      {/* <div className="">
-        <Button onClick={() => naviget(-1)}>Back</Button>
-      </div> */}
+      <div className="">
+        <Button onClick={() => navigate(-1)}>Back</Button>
+      </div>
     </div>
   );
 };

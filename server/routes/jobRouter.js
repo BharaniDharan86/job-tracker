@@ -8,6 +8,11 @@ jobRouter
   .get(authController.protect, jobController.getJobByUser)
   .post(authController.protect, jobController.createJob);
 
-jobRouter.route("/:id").get(jobController.getJobById);
+jobRouter.route("/stats").get(authController.protect, jobController.jobStats);
+
+jobRouter
+  .route("/:id")
+  .get(jobController.getJobById)
+  .post(jobController.updateStatus);
 
 module.exports = jobRouter;
