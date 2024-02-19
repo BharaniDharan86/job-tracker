@@ -24,7 +24,7 @@ export const Login = () => {
     <div className="flex flex-col justify-center items-center h-[80vh]">
       <h1 className="font-bold text-2xl p-3">Welcome Back</h1>
       <form className="w-[30%]" onSubmit={handleSubmit(submit)}>
-        <label className="input input-bordered flex items-center gap-2 mb-3">
+        <label className="input input-bordered flex items-center bg-none gap-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"

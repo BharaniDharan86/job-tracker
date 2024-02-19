@@ -1,13 +1,18 @@
-export async function getAllJobs(token) {
-  const response = await fetch("http://localhost:3000/api/v1/jobs", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export async function getAllJobs(token, filter, sortBy) {
+  const sortValue =
+    sortBy.split("-")[1] === "asc" ? "dateapplied" : "-dateapplied";
+  const response = await fetch(
+    `http://localhost:3000/api/v1/jobs?filter=${filter}&sort=${sortValue}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   const data = await response.json();
-
+  console.log(data);
   return data;
 }
 

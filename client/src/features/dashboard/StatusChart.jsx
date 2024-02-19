@@ -11,8 +11,8 @@ const StatusChart = ({ data }) => {
   };
 
   return (
-    <>
-      <PieChart width={800} height={400}>
+    <div className="flex items-center justify-center">
+      <PieChart width={400} height={400}>
         <Pie
           data={query}
           cx="40%"
@@ -24,27 +24,26 @@ const StatusChart = ({ data }) => {
           dataKey="nums"
         >
           {query.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={style[entry._id]} />
+            <Cell
+              key={`cell-${index}`}
+              fill={style[entry._id]}
+              stroke={style[entry._id]}
+            />
           ))}
         </Pie>
-        <Legend
-          verticalAlign="middle"
-          align="right"
-          width="30%"
-          layout="vertical"
-          iconSize={15}
-          iconType="circle"
-        />
+
         <Tooltip />
       </PieChart>
-      <ul>
-        {query.map((entry, index) => (
-          <li key={`legend-${index}`} style={{ color: style[entry._id] }}>
-            {entry._id}
-          </li>
-        ))}
-      </ul>
-    </>
+      <div>
+        <ul>
+          {query.map((entry, index) => (
+            <li key={`legend-${index}`} style={{ color: style[entry._id] }}>
+              {entry._id}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 

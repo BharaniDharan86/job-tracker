@@ -1,3 +1,4 @@
+/* eslint-disable multiline-ternary */
 /* eslint-disable no-console */
 // create job
 const { default: mongoose } = require("mongoose");
@@ -51,10 +52,19 @@ exports.getJobById = async (req, res, next) => {
 exports.getJobByUser = async (req, res, next) => {
   const userId = req.user._id;
 
-  try {
-    const query = Job.find({ user: userId });
+  const { filter, sort } = req.query;
+  console.log(filter);
 
-    const jobs = await query.sort("dateapplied");
+  try {
+    let query =
+      filter === "All"
+        ? Job.find({ user: userId })
+        : Job.find({ user: userId, status: filter });
+    if (sort) {
+      query = query.sort(sort);
+    }
+
+    const jobs = await query;
 
     if (!jobs) throw new Error("Invalid Job Id");
     return res.status(200).json({
