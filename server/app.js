@@ -5,6 +5,10 @@ const morgan = require("morgan");
 
 const userRouter = require("./routes/userRouter");
 const jobRouter = require("./routes/jobRouter");
+const jobInfoRoutes = require("./routes/jobInfoRouter");
+const applyRouter = require("./routes/applyRouter");
+const AppError = require("./utils/appError");
+const globalErrHandler = require("./controllers/errorController");
 
 app.use(
   cors({
@@ -19,4 +23,13 @@ app.use(express.json(""));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/jobinfo", jobInfoRoutes);
+app.use("/api/v1/apply", applyRouter);
+
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find the ${req.url}`, 404));
+});
+
+app.use(globalErrHandler);
+
 module.exports = app;

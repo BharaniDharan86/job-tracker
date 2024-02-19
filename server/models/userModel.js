@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide the Password"],
     },
+    jobapplication: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Applicant",
+      },
+    ],
   },
   {
     timestamps: true,
