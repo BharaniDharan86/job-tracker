@@ -13,6 +13,7 @@ jobRouter.route("/stats").get(authController.protect, jobController.jobStats);
 jobRouter
   .route("/:id")
   .get(jobController.getJobById)
-  .post(jobController.updateStatus);
+  .post(jobController.updateStatus)
+  .delete(jobController.deleteJobById);
 
 module.exports = jobRouter;

@@ -15,7 +15,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
     <div
       className={` absolute ${
         isSideBarOpen ? "translate-x-[0]" : "translate-x-[-200%]"
-      }  left-0 top-[64px] z-50 h-screen w-full transition-all duration-300`}
+      }  left-0 top-[64px] z-50 h-screen  transition-all duration-300`}
     >
       <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-slate-900 border-r-2 border-slate-800">
         <li className="mb-3 p-2 hover:bg-slate-800 w-[100%] transition-all duration-400 hover:translate-x-1">

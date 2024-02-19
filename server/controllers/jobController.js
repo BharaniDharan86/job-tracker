@@ -144,6 +144,20 @@ exports.jobStats = async (req, res, next) => {
   }
 };
 
-//update job de
+exports.deleteJobById = async (req, res, next) => {
+  const { id } = req.params;
 
-//delete job
+  try {
+    await Job.findByIdAndDelete(id);
+    return res.status(200).json({
+      status: "success",
+      success: true,
+    });
+  } catch (err) {
+    return res.status(400).jsone({
+      status: "failed",
+      success: false,
+      message: "Id Not Found",
+    });
+  }
+};

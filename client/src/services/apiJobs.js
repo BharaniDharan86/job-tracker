@@ -71,3 +71,16 @@ export async function getJobStats(token) {
 
   return data;
 }
+
+export async function deleteJobById(id, token) {
+  const response = await fetch(`http://localhost:3000/api/v1/jobs/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await response.json();
+
+  return data;
+}

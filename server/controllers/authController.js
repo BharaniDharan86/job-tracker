@@ -17,7 +17,6 @@ exports.protect = async (req, res, next) => {
   }
 
   const access_token = req.headers.authorization.split(" ")[1];
-  console.log(access_token);
   const decoded = await promisify(jwt.verify)(
     access_token,
     process.env.JWT_SECRET
