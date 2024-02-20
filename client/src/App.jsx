@@ -12,6 +12,8 @@ import { AppLayout } from "./ui/AppLayout";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./pages/ProtectedRoute";
 import { CookiesProvider } from "react-cookie";
+import JobPost from "./features/jobs/JobPost";
+import { JobPostDetail } from "./pages/JobPostDetail";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "jobdetail/:id",
         element: <JobDetail />,
+      },
+      {
+        path: "jobs",
+        element: <JobPost />,
+      },
+      {
+        path: "jobs/:id",
+        element: <JobPostDetail />,
       },
     ],
   },

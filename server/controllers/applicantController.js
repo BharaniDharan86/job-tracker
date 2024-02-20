@@ -1,5 +1,6 @@
 const Applicant = require("../models/applicantModel");
 const User = require("../models/userModel");
+
 exports.applyJob = async (req, res, next) => {
   const { yearsOfExperience } = req.body;
   const user = req.user._id;
@@ -11,7 +12,7 @@ exports.applyJob = async (req, res, next) => {
     yearsOfExperience,
   });
 
-  const currUser = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     user,
     {
       $addToSet: {
@@ -28,5 +29,6 @@ exports.applyJob = async (req, res, next) => {
     status: "success",
     success: true,
     message: "applied for the job",
+    newApplication,
   });
 };

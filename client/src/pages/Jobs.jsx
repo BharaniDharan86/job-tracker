@@ -1,5 +1,5 @@
-import { JobHeader } from "../features/jobs/JobHeader";
-import { JobTable } from "../features/jobs/JobTable";
+import { JobHeader } from "../features/myjobs/JobHeader";
+import { JobTable } from "../features/myjobs/JobTable";
 import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { getAllJobs } from "../services/apiJobs";
