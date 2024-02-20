@@ -1,13 +1,17 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const createToken = require("../utils/createJwtToken");
+const AppError = require("../utils/appError");
+const catchAsync = require("../utils/catchAsync");
 
 //get the current User
 
 exports.getCurrentUser = async (req, res, next) => {
   const userId = req.user._id;
 
-  const userDetail = await User.findById(userId).select("username email");
+  const userDetail = await User.findById(userId).select(
+    "username email jobapplication"
+  );
 
   return res.status(200).json({
     status: "success",
@@ -18,11 +22,13 @@ exports.getCurrentUser = async (req, res, next) => {
 
 //updating the user detail username
 
-exports.updateMe = async (req, res, next) => {
+exports.updateMe = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const { username } = req.body;
 
   const currUser = await User.findById(userId);
+
+  if (!currUser) return next(new AppError("User not found", 404));
 
   if (username) {
     currUser.username = username;
@@ -37,38 +43,31 @@ exports.updateMe = async (req, res, next) => {
       email: currUser.email,
     },
   });
-};
+});
 
 //update the user password
 
-exports.updatePassword = async (req, res, next) => {
+exports.updatePassword = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
   const { password, newPassword } = req.body;
   const currUser = await User.findById(userId);
-  try {
-    const isValidPassword = bcrypt.compareSync(password, currUser.password);
+  const isValidPassword = bcrypt.compareSync(password, currUser.password);
 
-    if (!isValidPassword) throw new Error("Invalid Password");
+  if (!isValidPassword) return next(new AppError("Invalid Password", 404));
 
-    if (isValidPassword) {
-      currUser.password = newPassword;
-      await currUser.save();
-    }
-    const token = createToken(currUser._id);
-    return res
-      .cookie("access_token", token, {
-        withCredentials: true,
-        httpOnly: false,
-      })
-      .status(200)
-      .json({
-        status: "success",
-        token,
-      });
-  } catch (error) {
-    return res.status(400).json({
-      status: "success",
-      success: false,
-    });
+  if (isValidPassword) {
+    currUser.password = newPassword;
+    await currUser.save();
   }
-};
+  const token = createToken(currUser._id);
+  return res
+    .cookie("access_token", token, {
+      withCredentials: true,
+      httpOnly: false,
+    })
+    .status(200)
+    .json({
+      status: "success",
+      token,
+    });
+});

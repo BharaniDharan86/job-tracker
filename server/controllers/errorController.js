@@ -22,14 +22,14 @@ function handleTokenExpiresErr() {
   return new AppError(message, 403);
 }
 
-function errDev(err, res) {
-  return res.status(err.statusCode).json({
-    status: "Failed",
-    message: err.message,
-    error: err,
-    stack: err.stack,
-  });
-}
+// function errDev(err, res) {
+//   return res.status(err.statusCode).json({
+//     status: "Failed",
+//     message: err.message,
+//     error: err,
+//     stack: err.stack,
+//   });
+// }
 
 function errProd(err, res) {
   if (err.isOperational) {
@@ -49,14 +49,14 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
-  if (process.env.NODE_ENV === "production") {
-    let error = Object.create(err);
-    if (error.name === "CastError") error = handleCastErrorDB(err);
-    if (err.code === 11000) error = handleDuplicateField(err);
-    if (err.name === "JsonWebTokenError") error = handleJWTErr();
-    if (err.name === "TokenExpiredError") error = handleTokenExpiresErr();
-    errProd(error, res);
-  } else if (process.env.NODE_ENV === "development") {
-    return errDev(err, res);
-  }
+  // if (process.env.NODE_ENV === "production") {
+  let error = Object.create(err);
+  if (error.name === "CastError") error = handleCastErrorDB(err);
+  if (err.code === 11000) error = handleDuplicateField(err);
+  if (err.name === "JsonWebTokenError") error = handleJWTErr();
+  if (err.name === "TokenExpiredError") error = handleTokenExpiresErr();
+  errProd(error, res);
+  // } else if (process.env.NODE_ENV === "development") {
+  //   return errDev(err, res);
+  // }
 };

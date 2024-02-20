@@ -1,51 +1,38 @@
 //job -model
 const JobInfo = require("../models/jobInfoModel");
+const AppError = require("../utils/appError");
+const catchAsync = require("../utils/catchAsync");
 
-exports.postJob = async (req, res, next) => {
+exports.postJob = catchAsync(async (req, res, next) => {
   //get the user from the protect controlller
   const user = req.user._id;
 
-  try {
-    const newJob = await JobInfo.create({ ...req.body, postedBy: user });
+  const newJob = await JobInfo.create({ ...req.body, postedBy: user });
 
-    if (!newJob) throw new Error("Something Went Wrong");
+  if (!newJob) return next(new AppError("Something Went Wrong", 404));
 
-    return res.status(200).json({
-      status: "success",
-      success: true,
-      newJob,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  return res.status(200).json({
+    status: "success",
+    success: true,
+    newJob,
+  });
+});
 
-exports.getAllJob = async (req, res, next) => {
-  try {
-    const allJobs = await JobInfo.find().populate({
-      path: "postedBy",
-      select: "username -_id",
-    });
-    return res.status(200).json({
-      status: "success",
-      success: false,
-      results: allJobs.length,
-      allJobs,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
-  }
-};
+exports.getAllJob = catchAsync(async (req, res, next) => {
+  const allJobs = await JobInfo.find().populate({
+    path: "postedBy",
+    select: "username -_id",
+  });
 
-exports.getMyJob = async (req, res, next) => {
+  return res.status(200).json({
+    status: "success",
+    success: false,
+    results: allJobs.length,
+    allJobs,
+  });
+});
+
+exports.getMyJob = catchAsync(async (req, res, next) => {
   const postedBy = req.user._id;
 
   const jobsByUser = await JobInfo.find({ postedBy });
@@ -56,9 +43,9 @@ exports.getMyJob = async (req, res, next) => {
     results: jobsByUser.length,
     jobsByUser,
   });
-};
+});
 
-exports.getJobById = async (req, res, next) => {
+exports.getJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
   const job = await JobInfo.findById(id);
@@ -68,4 +55,4 @@ exports.getJobById = async (req, res, next) => {
     success: true,
     job,
   });
-};
+});

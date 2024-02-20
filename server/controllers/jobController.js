@@ -1,163 +1,124 @@
+/* eslint-disable nonblock-statement-body-position */
 /* eslint-disable multiline-ternary */
 /* eslint-disable no-console */
 // create job
 const { default: mongoose } = require("mongoose");
 const Job = require("../models/jobModel");
+const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/appError");
 
-exports.createJob = async (req, res, next) => {
+exports.createJob = catchAsync(async (req, res, next) => {
   //get the all the information about the user
   const jobDetails = req.body;
 
-  try {
-    //create the job
-    const newJob = await Job.create({ ...jobDetails, user: req.user._id });
-    if (!newJob) throw new Error("There was problem while creating a new job");
-    //send the response
-    return res.status(201).json({
-      status: "success",
-      success: true,
-      message: "Job created successfully",
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  //create the job
+  const newJob = await Job.create({ ...jobDetails, user: req.user._id });
+  if (!newJob)
+    return next(
+      new AppError("There was problem while creating a new job", 404)
+    );
+  //send the response
+  return res.status(201).json({
+    status: "success",
+    success: true,
+    message: "Job created successfully",
+  });
+});
 
-exports.getJobById = async (req, res, next) => {
+exports.getJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  try {
-    const job = await Job.findById(id);
+  const job = await Job.findById(id);
 
-    if (!job) throw new Error("Invalid Job Id");
+  if (!job) return next(new AppError("Invalid Job Id", 404));
 
-    return res.status(200).json({
-      status: "success",
-      success: true,
-      job,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  return res.status(200).json({
+    status: "success",
+    success: true,
+    job,
+  });
+});
 
-exports.getJobByUser = async (req, res, next) => {
+exports.getJobByUser = catchAsync(async (req, res, next) => {
   const userId = req.user._id;
 
   const { filter, sort } = req.query;
-  console.log(filter);
 
-  try {
-    let query =
-      filter === "All"
-        ? Job.find({ user: userId })
-        : Job.find({ user: userId, status: filter });
-    if (sort) {
-      query = query.sort(sort);
-    }
-
-    const jobs = await query;
-
-    if (!jobs) throw new Error("Invalid Job Id");
-    return res.status(200).json({
-      status: "success",
-      success: true,
-      results: jobs.length,
-      jobs,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
+  let query =
+    filter === "All"
+      ? Job.find({ user: userId })
+      : Job.find({ user: userId, status: filter });
+  if (sort) {
+    query = query.sort(sort);
   }
-};
+
+  const jobs = await query;
+
+  if (!jobs) return next(new AppError("Invalid Job Id", 404));
+  return res.status(200).json({
+    status: "success",
+    success: true,
+    results: jobs.length,
+    jobs,
+  });
+});
 
 //update status
 
-exports.updateStatus = async (req, res, next) => {
+exports.updateStatus = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  try {
-    const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
+  const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
-    if (!updatedJob) throw new Error("Invalid Job Id");
+  if (!updatedJob) return next(new AppError("Invalid Job Id", 404));
 
-    return res.status(200).json({
-      status: "success",
-      success: true,
-      message: "Updated Successfully",
-    });
-  } catch (error) {
-    return res.status(400).json({
-      status: "failed",
-      success: false,
-      message: error.message,
-    });
-  }
-};
+  return res.status(200).json({
+    status: "success",
+    success: true,
+    message: "Updated Successfully",
+  });
+});
 
 //stats
 
-exports.jobStats = async (req, res, next) => {
+exports.jobStats = catchAsync(async (req, res, next) => {
   const userId = new mongoose.Types.ObjectId(req.user._id);
 
-  try {
-    const query = await Job.aggregate([
-      {
-        $match: {
-          user: userId,
+  const query = await Job.aggregate([
+    {
+      $match: {
+        user: userId,
+      },
+    },
+    {
+      $group: {
+        _id: "$status",
+        nums: {
+          $sum: 1,
         },
       },
-      {
-        $group: {
-          _id: "$status",
-          nums: {
-            $sum: 1,
-          },
-        },
-      },
-    ]);
+    },
+  ]);
 
-    const totalApplications = query.reduce((acc, curr) => {
-      return (acc += curr.nums);
-    }, 0);
+  const totalApplications = query.reduce((acc, curr) => {
+    return (acc += curr.nums);
+  }, 0);
 
-    return res.status(200).json({
-      totalApplications,
-      query,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+  return res.status(200).json({
+    totalApplications,
+    query,
+  });
+});
 
-exports.deleteJobById = async (req, res, next) => {
+exports.deleteJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  try {
-    await Job.findByIdAndDelete(id);
-    return res.status(200).json({
-      status: "success",
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400).jsone({
-      status: "failed",
-      success: false,
-      message: "Id Not Found",
-    });
-  }
-};
+  await Job.findByIdAndDelete(id);
+  return res.status(200).json({
+    status: "success",
+    success: true,
+  });
+});
