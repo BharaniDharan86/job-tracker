@@ -38,3 +38,20 @@ exports.applyJob = catchAsync(async (req, res, next) => {
     newApplication,
   });
 });
+
+exports.viewApplicantDetail = catchAsync(async (req, res, next) => {
+  const { jobId } = req.params;
+
+  const applicants = await Applicant.find({ job: jobId }).populate({
+    path: "user",
+    select: "email username",
+  });
+
+  if (!applicants) return next(new AppError("failed to fetch the jobs", 404));
+
+  return res.status(200).json({
+    status: "success",
+    success: true,
+    applicants,
+  });
+});

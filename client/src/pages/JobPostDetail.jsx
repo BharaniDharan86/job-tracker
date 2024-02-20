@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { applyJob, getSingleJobPost } from "../services/apiAllJobs";
@@ -25,18 +24,33 @@ export const JobPostDetail = () => {
   });
 
   if (isLoading || isUserLoading) return <Loader />;
+  console.log(data.job);
+  const {
+    _id,
+    company,
+    description,
+    location,
+    requirements,
+    responsibilities,
+    salary,
+    title,
+    type,
+    postedBy,
+    createdAt,
+  } = data.job;
 
-  const { company } = data.job;
-  console.log(userData);
-
+  // eslint-disable-next-line no-unused-vars
   const isApplied = userData.jobapplication.includes(id);
   console.log(isApplied);
 
   return (
-    <div>
-      {company}
+    <div className="flex justify-center items-center ">
+      <div className="w-[800px]">
+        <h1>{title}</h1>
+        <h1>{company}</h1>
 
-      <Button onClick={() => mutate(id)}>Apply</Button>
+        <div>{requirements.map}</div>
+      </div>
     </div>
   );
 };

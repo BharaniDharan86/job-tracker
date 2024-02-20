@@ -9,7 +9,7 @@ const { protect } = require("../controllers/authController");
 const jobInfoRoutes = express.Router();
 
 jobInfoRoutes.route("/").get(getAllJob).post(protect, postJob);
-jobInfoRoutes.route("/:id").get(getJobById);
 jobInfoRoutes.route("/myjobs").get(protect, getMyJob);
+jobInfoRoutes.route("/:id").get(getJobById);
 
 module.exports = jobInfoRoutes;

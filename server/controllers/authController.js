@@ -11,7 +11,7 @@ const AppError = require("../utils/appError");
 
 exports.protect = catchAsync(async (req, res, next) => {
   //check the presence of the token if not they are not logged in
-
+  console.log("Yup");
   if (
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer")

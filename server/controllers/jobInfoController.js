@@ -21,7 +21,7 @@ exports.postJob = catchAsync(async (req, res, next) => {
 exports.getAllJob = catchAsync(async (req, res, next) => {
   const allJobs = await JobInfo.find().populate({
     path: "postedBy",
-    select: "username -_id",
+    select: "username ",
   });
 
   return res.status(200).json({
@@ -34,6 +34,7 @@ exports.getAllJob = catchAsync(async (req, res, next) => {
 
 exports.getMyJob = catchAsync(async (req, res, next) => {
   const postedBy = req.user._id;
+  console.log("Entered", postedBy);
 
   const jobsByUser = await JobInfo.find({ postedBy });
 
@@ -48,7 +49,10 @@ exports.getMyJob = catchAsync(async (req, res, next) => {
 exports.getJobById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
 
-  const job = await JobInfo.findById(id);
+  const job = await JobInfo.findById(id).populate({
+    path: "postedBy",
+    select: "username ",
+  });
 
   return res.status(200).json({
     status: "success",
