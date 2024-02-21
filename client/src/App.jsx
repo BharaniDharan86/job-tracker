@@ -14,7 +14,7 @@ import { ProtectedRoute } from "./pages/ProtectedRoute";
 import { CookiesProvider } from "react-cookie";
 import JobPost from "./features/jobs/JobPost";
 import { JobPostDetail } from "./pages/JobPostDetail";
-
+import { Toaster } from "react-hot-toast";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -86,6 +86,21 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ReactQueryDevtools />
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{
+            margin: "8px",
+          }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+          }}
+        />
       </QueryClientProvider>
     </CookiesProvider>
   );

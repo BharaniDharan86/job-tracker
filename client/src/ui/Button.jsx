@@ -23,7 +23,6 @@ export const Button = ({ children, type, onClick, rounded, disabled }) => {
 
   return (
     <button
-      disabled={true}
       className={`btn btn-wide ${btnType[type]} disabled:cursor-not-allowed  bg-[#1e40af]  px-4 py-2 text-slate-100  hover:bg-[#1d4ed8] transition-all `}
     >
       {children}

@@ -3,6 +3,7 @@ import { Button } from "../ui/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { verifyEmail } from "../services/apiAuth";
+import toast from "react-hot-toast";
 
 export default function Signup() {
   const { register, formState, handleSubmit, getValues } = useForm();
@@ -10,23 +11,18 @@ export default function Signup() {
   const { errors } = formState;
   const navigate = useNavigate();
 
-  const { mutate, error, isPending } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (body) => verifyEmail(body),
     onSuccess: () => {
       navigate("/signup");
     },
-    onError: () => {
-      alert("There was an unknown error take a look at the console");
+    onError: (error) => {
+      toast.error(error.message || "Something Went Wrong");
     },
   });
 
   function submit(data) {
-    console.log(data);
     mutate(data);
-  }
-
-  if (error) {
-    alert(error);
   }
 
   return (

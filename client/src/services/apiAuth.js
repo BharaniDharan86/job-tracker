@@ -1,5 +1,4 @@
 export const verifyEmail = async function (body) {
-  console.log(body);
   const response = await fetch(
     "http://localhost:3000/api/v1/users/verifyemail",
     {
@@ -8,11 +7,13 @@ export const verifyEmail = async function (body) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
-      credentials: true,
+      credentials: "include",
     }
   );
 
   const data = await response.json();
+
+  if (data.status === "Failed") throw new Error(data.message);
 
   return data;
 };
@@ -24,10 +25,12 @@ export const signUp = async function (otp) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(otp),
-    credentials: true,
+    credentials: "include",
   });
 
   const data = await response.json();
+
+  if (data.status === "Failed") throw new Error(data.message);
 
   return data;
 };
@@ -45,7 +48,7 @@ export const login = async function (userData) {
 
   const data = await response.json();
 
-  console.log(data);
+  if (data.status === "Failed") throw new Error(data.message);
 
   return data;
 };

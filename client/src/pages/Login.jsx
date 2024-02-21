@@ -3,19 +3,23 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../services/apiAuth";
+import toast from "react-hot-toast";
 
 export const Login = () => {
   const { handleSubmit, register, formState } = useForm();
   const navigate = useNavigate();
-  const { mutate, isPending, data } = useMutation({
+  const { mutate, isPending, data, isError } = useMutation({
     mutationFn: (data) => login(data),
     onSuccess: () => {
       navigate("/app/myjobs");
     },
+    onError: (err) => {
+      toast.error(err.message || "Somthing Went wrong");
+    },
   });
 
   const { errors } = formState;
-
+  console.log(isError);
   function submit(data) {
     mutate(data);
   }

@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import { HiOutlineMapPin } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 const JobPostItem = ({ job }) => {
@@ -28,7 +27,7 @@ const JobPostItem = ({ job }) => {
             <p>{location}</p>
           </div>
           <button className="btn-sm bg-blue-800 text-slate-200 btn-primary">
-            Apply Now
+            View
           </button>
         </div>
       </div>

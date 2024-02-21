@@ -1,7 +1,7 @@
 1. UI
    *home page
    *user - profile
-   *better job detail page
+   //*better job detail page
    *jobInfo Posting
    *applicant detail page
    *better job application page

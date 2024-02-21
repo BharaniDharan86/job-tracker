@@ -8,6 +8,8 @@ exports.applyJob = catchAsync(async (req, res, next) => {
   const user = req.user._id;
   const { jobId } = req.params;
 
+  console.log(user, jobId, yearsOfExperience);
+
   const newApplication = await Applicant.create({
     job: jobId,
     user,
@@ -18,7 +20,7 @@ exports.applyJob = catchAsync(async (req, res, next) => {
     next(new AppError("Cannot to Apply for this Job", 400));
   }
 
-  await User.findByIdAndUpdate(
+  const userDetail = await User.findByIdAndUpdate(
     user,
     {
       $addToSet: {
@@ -30,6 +32,8 @@ exports.applyJob = catchAsync(async (req, res, next) => {
       runValidators: true,
     }
   );
+
+  console.log(userDetail, newApplication);
 
   return res.status(200).json({
     status: "success",

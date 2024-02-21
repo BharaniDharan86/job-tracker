@@ -11,15 +11,12 @@ export const Jobs = () => {
 
   const [sortBy, setSortBy] = useState("date-asc");
 
-  console.log(filter);
-
   const { isLoading, data } = useQuery({
     queryKey: ["jobs", filter, sortBy],
     queryFn: () => getAllJobs(cookies.access_token, filter, sortBy),
   });
 
-  if (isLoading) return <Loader />;
-
+  
   return (
     <div>
       <JobHeader
@@ -28,7 +25,7 @@ export const Jobs = () => {
         sortBy={sortBy}
         setSortBy={setSortBy}
       />
-      <JobTable jobs={data?.jobs} />
+      <JobTable jobs={data?.jobs} isLoading={isLoading} />
     </div>
   );
 };

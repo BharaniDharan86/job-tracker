@@ -4,6 +4,7 @@ import { Button } from "../ui/Button";
 import { signUp } from "../services/apiAuth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
@@ -12,6 +13,9 @@ const VerifyEmail = () => {
     mutationFn: (otp) => signUp(otp),
     onSuccess: () => {
       navigate("/app/myjobs");
+    },
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 
@@ -24,18 +28,24 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(submit)}>
+    <div className="flex justify-center items-center h-[90vh] flex-col">
+      <p className="mb-3 text-xl">
+        Please check your email for the 6-digit verification code and enter it
+        below
+      </p>
+      <form onSubmit={handleSubmit(submit)} className="flex gap-2 items-center">
         <input
           type="text"
           placeholder="Enter the 6 digit code"
-          className="input w-full max-w-xs"
+          className="input w-full input-bordered max-w-xs"
           {...register("otp", {
             required: "Please Provide The OTP You Received from your Email",
           })}
         />
         {errors?.otp && <p>{errors.otp.message}</p>}
-        <Button disabled={isPending}>Submit</Button>
+        <Button disabled={isPending} type="small">
+          Submit
+        </Button>
       </form>
     </div>
   );

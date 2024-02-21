@@ -23,6 +23,7 @@ export const getSingleJobPost = async (id, token) => {
 };
 
 export const applyJob = async (id, token) => {
+  console.log(id);
   //{{url}}api/v1/apply/65d361301f02833fa42fbc62
   const yoe = {
     yearsOfExperience: 2,
