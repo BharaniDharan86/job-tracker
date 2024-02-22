@@ -3,8 +3,8 @@ import { JobTable } from "../features/myjobs/JobTable";
 import { useCookies } from "react-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { getAllJobs } from "../services/apiJobs";
-import Loader from "../ui/Loader";
 import { useState } from "react";
+import Loader from "../ui/Loader";
 export const Jobs = () => {
   const [cookies] = useCookies();
   const [filter, setFilter] = useState("All");
@@ -16,7 +16,8 @@ export const Jobs = () => {
     queryFn: () => getAllJobs(cookies.access_token, filter, sortBy),
   });
 
-  
+  if (isLoading) return <Loader />;
+
   return (
     <div>
       <JobHeader

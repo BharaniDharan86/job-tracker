@@ -11,7 +11,6 @@ const AppError = require("../utils/appError");
 
 exports.protect = catchAsync(async (req, res, next) => {
   //check the presence of the token if not they are not logged in
-  console.log("Yup");
   if (
     !req.headers.authorization ||
     !req.headers.authorization.startsWith("Bearer")
@@ -45,7 +44,6 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
 
   const isUserExists = await User.findOne({ email });
 
-  console.log(isUserExists);
   if (isUserExists) {
     return next(new AppError("User With This Mail Already Exists", 404));
   }

@@ -9,7 +9,7 @@ export const ProtectedRoute = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!cookies.access_token) return navigate("/login");
+    if (!cookies?.access_token) return navigate("/login");
   }, [cookies, navigate]);
 
   if (cookies.access_token) return children;

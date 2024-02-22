@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 export const Login = () => {
   const { handleSubmit, register, formState } = useForm();
   const navigate = useNavigate();
-  const { mutate, isPending, data, isError } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (data) => login(data),
     onSuccess: () => {
       navigate("/app/myjobs");
@@ -19,7 +19,7 @@ export const Login = () => {
   });
 
   const { errors } = formState;
-  console.log(isError);
+
   function submit(data) {
     mutate(data);
   }

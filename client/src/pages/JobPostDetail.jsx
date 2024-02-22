@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { applyJob, getSingleJobPost } from "../services/apiAllJobs";
 import { useCookies } from "react-cookie";
 import Loader from "../ui/Loader";
@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 export const JobPostDetail = () => {
   const { id } = useParams();
   const [cookies] = useCookies();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryKey: ["jobpostdetails", id],
@@ -26,6 +27,9 @@ export const JobPostDetail = () => {
     mutationFn: () => applyJob(id, cookies.access_token),
     onSuccess: () => {
       toast.success("Applied Successfully ");
+      queryClient.invalidateQueries({
+        queryKey: ["jobpostdetails", id],
+      });
     },
   });
 
