@@ -1,12 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
-import {
-  HiBriefcase,
-  HiMiniCalendarDays,
-  HiMiniHome,
-  HiShoppingBag,
-} from "react-icons/hi2";
+import { HiBriefcase, HiMiniCalendarDays, HiMiniHome } from "react-icons/hi2";
 import { HiMiniBriefcase } from "react-icons/hi2";
 
 import { HiMiniUserCircle } from "react-icons/hi2";
@@ -19,8 +14,23 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
     >
       <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-slate-900 border-r-2 border-slate-800">
         <li className="mb-3 p-2 hover:bg-slate-800 w-[100%] transition-all duration-400 hover:translate-x-1">
-          <NavLink to="/home" className="flex items-center gap-4 gap-y-3">
+          <NavLink to="/" className="flex items-center gap-4 gap-y-3">
             <HiMiniHome /> Home
+          </NavLink>
+        </li>
+        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+          <NavLink
+            to="/app/dashboard"
+            className="flex items-center gap-4 row-gap-4"
+          >
+            <HiMiniCalendarDays />
+            Dashboard
+          </NavLink>
+        </li>
+        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+          <NavLink to="/app/jobs" className="flex items-center gap-4 row-gap-4">
+            <HiMiniUserCircle />
+            All Jobs
           </NavLink>
         </li>
         <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
@@ -34,23 +44,18 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
         </li>
         <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink
-            to="/dashboard"
+            to="/app/postedjobs"
             className="flex items-center gap-4 row-gap-4"
           >
-            <HiMiniCalendarDays />
-            Dashboard
+            <HiMiniBriefcase />
+            Posted Jobs
           </NavLink>
         </li>
+
         <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink to="/profile" className="flex items-center gap-4 row-gap-4">
             <HiMiniUserCircle />
             Profile
-          </NavLink>
-        </li>
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
-          <NavLink to="/profile" className="flex items-center gap-4 row-gap-4">
-            <HiMiniUserCircle />
-            AllJobs
           </NavLink>
         </li>
       </ul>

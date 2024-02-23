@@ -7,6 +7,8 @@ exports.postJob = catchAsync(async (req, res, next) => {
   //get the user from the protect controlller
   const user = req.user._id;
 
+  console.log(req.body);
+
   const newJob = await JobInfo.create({ ...req.body, postedBy: user });
 
   if (!newJob) return next(new AppError("Something Went Wrong", 404));
@@ -34,7 +36,6 @@ exports.getAllJob = catchAsync(async (req, res, next) => {
 
 exports.getMyJob = catchAsync(async (req, res, next) => {
   const postedBy = req.user._id;
-  console.log("Entered", postedBy);
 
   const jobsByUser = await JobInfo.find({ postedBy });
 

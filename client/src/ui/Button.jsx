@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
-export const Button = ({ children, type, onClick, rounded, disabled }) => {
-  console.log(disabled);
+export const Button = ({ children, type, onClick, rounded }) => {
   const btnType = {
     full: "w-full",
     small: "w-fit",

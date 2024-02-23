@@ -6,6 +6,7 @@ import { JobDetail } from "./pages/JobDetail";
 import { Jobs } from "./pages/Jobs";
 import { Login } from "./pages/Login";
 import { Profile } from "./pages/Profile";
+import Hero from "./pages/Hero";
 import Signup from "./pages/Signup";
 import VerifyEmail from "./pages/VerifyEmail";
 import { AppLayout } from "./ui/AppLayout";
@@ -15,10 +16,12 @@ import { CookiesProvider } from "react-cookie";
 import JobPost from "./features/jobs/JobPost";
 import { JobPostDetail } from "./pages/JobPostDetail";
 import { Toaster } from "react-hot-toast";
+import Applicant from "./pages/Applicant";
+import PostedJob from "./pages/PostedJob";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <p>Home Page</p>,
+    element: <Hero />,
   },
   {
     path: "/app",
@@ -55,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "jobs/:id",
         element: <JobPostDetail />,
+      },
+      {
+        path: "postedjobs",
+        element: <PostedJob />,
+      },
+      {
+        path: "postedjobs/:id",
+        element: <Applicant />,
       },
     ],
   },
