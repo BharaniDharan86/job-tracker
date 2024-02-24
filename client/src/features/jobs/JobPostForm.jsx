@@ -45,7 +45,6 @@ export const JobPostForm = () => {
       responsibilities: responsibilitesArr,
       type: employmenttype,
     };
-    console.log(jobData);
 
     mutate(jobData);
   }

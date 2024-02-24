@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide the Password"],
     },
+    userimage: {
+      type: "String",
+      default: "http://tinyurl.com/careersync",
+    },
     jobapplication: [
       {
         type: mongoose.Schema.ObjectId,
