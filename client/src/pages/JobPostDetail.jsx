@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { applyJob, getSingleJobPost } from "../services/apiAllJobs";
 import { useCookies } from "react-cookie";
@@ -10,12 +10,13 @@ import { PiBriefcaseLight } from "react-icons/pi";
 import { PiMoney } from "react-icons/pi";
 import { HiMiniUser } from "react-icons/hi2";
 import toast from "react-hot-toast";
+import { HiArrowLeftCircle } from "react-icons/hi2";
 
 export const JobPostDetail = () => {
   const { id } = useParams();
   const [cookies] = useCookies();
   const queryClient = useQueryClient();
-
+  const navigate = useNavigate();
   const { data, isLoading } = useQuery({
     queryKey: ["jobpostdetails", id],
     queryFn: () => getSingleJobPost(id, cookies.access_token),
@@ -52,11 +53,23 @@ export const JobPostDetail = () => {
   const isApplied = userData.jobapplication.includes(id);
 
   return (
-    <div className="flex justify-center items-center w-full text-white h-full">
-      <div className="w-[900px] bg-slate-800 px-8 py-9 h-[80vh] overflow-y-scroll">
-        <header className="text-white px-2 py-2">
-          <h1 className="text-3xl font-bold text-white">{title}</h1>
-          <h1 className="text-2xl   text-white">{company}</h1>
+    <div className="flex justify-center items-center w-full  text-stone-800 h-screen">
+      <div className="w-[900px]  px-8 py-3 h-[80vh] overflow-y-scroll">
+        <button
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          {" "}
+          <HiArrowLeftCircle
+            className="text-2xl sm:text-4xl"
+            stroke="#fff"
+            fill="#171717"
+          />
+        </button>
+        <header className=" px-2 py-2">
+          <h1 className="text-3xl font-bold ">{title}</h1>
+          <h1 className="text-2xl   ">{company}</h1>
           <div className="flex gap-2  py-[0.7px] items-center">
             <PiMapPinBold />
             <h2 className="text-sm ">{location}</h2>
@@ -77,13 +90,11 @@ export const JobPostDetail = () => {
         </header>
         <main>
           <div className="py-2">
-            <h2 className="text-xl text-white font-bold">Job Description</h2>
+            <h2 className="text-xl  font-bold">Job Description</h2>
             <p className="text-sm">{description}</p>
           </div>
           <div className="py-2">
-            <h2 className="text-xl text-white font-bold">
-              Your Responsibilities
-            </h2>{" "}
+            <h2 className="text-xl  font-bold">Your Responsibilities</h2>{" "}
             <ul className="list-disc pl-4 text-sm">
               {responsibilities.map((el, ind) => {
                 return <li key={ind}>{el}</li>;
@@ -91,7 +102,7 @@ export const JobPostDetail = () => {
             </ul>
           </div>
           <div className="py-2">
-            <h2 className="text-xl text-white font-bold">Requirements</h2>{" "}
+            <h2 className="text-xl  font-bold">Requirements</h2>{" "}
             <ul className="list-disc pl-4 text-sm">
               {requirements.map((el, ind) => {
                 return <li key={ind}>{el}</li>;
@@ -99,7 +110,7 @@ export const JobPostDetail = () => {
             </ul>
           </div>
         </main>
-        <div className="py-3">
+        <div className="py-3 flex justify-center items-center sm:justify-end">
           <button
             onClick={mutate}
             disabled={isApplied}

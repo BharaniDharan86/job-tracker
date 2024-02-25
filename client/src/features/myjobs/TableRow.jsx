@@ -4,6 +4,8 @@ import { useState } from "react";
 import { HiEye } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 import { deleteJobById } from "../../services/apiJobs";
+import { HiMiniTrash } from "react-icons/hi2";
+import { HiEllipsisVertical } from "react-icons/hi2";
 
 function TableRow({ job }) {
   const { _id: id, companyname, jobtitle, status, location, dateapplied } = job;
@@ -32,21 +34,27 @@ function TableRow({ job }) {
     <tr>
       <th>{companyname}</th>
       <td>{jobtitle}</td>
-      <td>{status}</td>
-      <td>{location}</td>
-      <td>{applieddate}</td>
+      <td className="hidden sm:table-cell">{status}</td>
+      <td className="hidden sm:table-cell">{location}</td>
+      <td className="hidden sm:table-cell">{applieddate}</td>
       <td className="flex relative">
         {show && (
-          <div className="absolute flex flex-col gap-y-1 p-1 bg-slate-700 left-[-40px] top-0 z-20 ">
-            <NavLink to={`/app/jobdetail/${id}`}>View</NavLink>
-            <button onClick={() => mutate(id)}>Delete</button>
+          <div className="absolute flex flex-col gap-y-1 p-1 bg-slate-100 left-[-5px] top-0 z-20 ">
+            <NavLink to={`/app/jobdetail/${id}`}>
+              <HiEye />
+            </NavLink>
+            <button onClick={() => mutate(id)}>
+              <HiMiniTrash />
+            </button>
           </div>
         )}
         <button
           className="cursor-pointer"
           onClick={() => setShow((curr) => !curr)}
         >
-          <HiEye />
+          <span>
+            <HiEllipsisVertical />
+          </span>
         </button>
       </td>
     </tr>

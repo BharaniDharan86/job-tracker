@@ -5,7 +5,11 @@ const authController = require("../controllers/authController");
 
 jobRouter
   .route("/")
-  .get(authController.protect, jobController.getJobByUser)
+  .get(
+    authController.protect,
+
+    jobController.getJobByUser
+  )
   .post(authController.protect, jobController.createJob);
 
 jobRouter.route("/stats").get(authController.protect, jobController.jobStats);

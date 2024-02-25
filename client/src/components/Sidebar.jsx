@@ -12,13 +12,13 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
         isSideBarOpen ? "translate-x-[0]" : "translate-x-[-200%]"
       }  left-0 top-[64px] z-50 h-screen  transition-all duration-300`}
     >
-      <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-slate-900 border-r-2 border-slate-800">
-        <li className="mb-3 p-2 hover:bg-slate-800 w-[100%] transition-all duration-400 hover:translate-x-1">
+      <ul className="text-lg py-3  h-screen font-semibold w-[230px]  bg-white border-r-2 border-slate-100">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-[100%] transition-all duration-400 hover:translate-x-1">
           <NavLink to="/" className="flex items-center gap-4 gap-y-3">
             <HiMiniHome /> Home
           </NavLink>
         </li>
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink
             to="/app/dashboard"
             className="flex items-center gap-4 row-gap-4"
@@ -27,13 +27,13 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
             Dashboard
           </NavLink>
         </li>
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink to="/app/jobs" className="flex items-center gap-4 row-gap-4">
             <HiMiniUserCircle />
             All Jobs
           </NavLink>
         </li>
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink
             to="/app/myjobs"
             className="flex items-center gap-4 row-gap-4"
@@ -42,7 +42,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
             My Jobs
           </NavLink>
         </li>
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink
             to="/app/postedjobs"
             className="flex items-center gap-4 row-gap-4"
@@ -52,7 +52,7 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
           </NavLink>
         </li>
 
-        <li className="mb-3 p-2 hover:bg-slate-800 w-full transition-all duration-400 hover:translate-x-1">
+        <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
           <NavLink to="/profile" className="flex items-center gap-4 row-gap-4">
             <HiMiniUserCircle />
             Profile

@@ -11,6 +11,8 @@ exports.createJob = catchAsync(async (req, res, next) => {
   //get the all the information about the user
   const jobDetails = req.body;
 
+  console.log(req.body);
+
   //create the job
   const newJob = await Job.create({ ...jobDetails, user: req.user._id });
   if (!newJob)

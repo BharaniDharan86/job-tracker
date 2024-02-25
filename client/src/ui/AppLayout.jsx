@@ -14,7 +14,7 @@ export const AppLayout = () => {
         />
       </div>
 
-      <div className="mt-[60px]">
+      <div className="">
         <Outlet />
       </div>
     </div>

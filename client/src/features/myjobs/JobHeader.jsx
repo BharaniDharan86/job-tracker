@@ -10,9 +10,9 @@ export const JobHeader = ({ filter, setFilter, sortBy, setSortBy }) => {
         <h1 className="text-3xl font-semibold  tracking-wide">MY JOBS</h1>
       </div>
 
-      <div className="flex justify-end mb-4 px-3 gap-3 font-medium text-white">
+      <div className="flex justify-end mb-4 px-3 gap-3 font-medium text-stone-900">
         <select
-          className="select select-bordered w-full max-w-xs text-lg"
+          className="select  select-md select-bordered w-full max-w-xs text-lg"
           value={sortBy}
           onChange={(e) => {
             setSortBy(e.target.value);

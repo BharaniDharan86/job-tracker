@@ -6,7 +6,7 @@ import TableRow from "./TableRow";
 export const JobTable = ({ jobs, isLoading }) => {
   return (
     <div className="overflow-x-auto  z-0 px-4">
-      <table className="table  table-zebra ">
+      <table className="table table-zebra ">
         <TableHead />
         {isLoading ? (
           <div className="mb-[200px]">

@@ -1,4 +1,5 @@
 //job -model
+
 const JobInfo = require("../models/jobInfoModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
@@ -6,8 +7,6 @@ const catchAsync = require("../utils/catchAsync");
 exports.postJob = catchAsync(async (req, res, next) => {
   //get the user from the protect controlller
   const user = req.user._id;
-
-  console.log(req.body);
 
   const newJob = await JobInfo.create({ ...req.body, postedBy: user });
 

@@ -19,7 +19,7 @@ app.use(
 );
 app.use(morgan("dev"));
 
-app.use(express.json(""));
+app.use(express.json());
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/jobs", jobRouter);

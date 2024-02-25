@@ -29,19 +29,19 @@ export const JobForm = () => {
   }
 
   return (
-    <div className="h-[700px] flex border-3 border-red-3 bg-slate-800 flex-col justify-center items-center uppercase w-[680px] font-semibold ">
+    <div className="h-[100%] flex border-3 border-red-3 bg-slate-50 flex-col justify-center items-center uppercase md:w-[680px] sm:w-[100%] font-semibold ">
       <h1 className="text-center text-2xl font-bold">Add a New Job Post</h1>
       <form
-        className="w-full bg-slate-800 px-10"
+        className="w-[100%]  bg-slate-50 md:px-10 px-10"
         onSubmit={handleSubmit(submitForm)}
       >
-        <label className="form-control w-full ">
+        <label className="form-control w-full">
           <div className="label mb-[-3px]">
             <span className="label-text">Company Name</span>
           </div>
           <input
             type="text"
-            className="input input-bordered input-md w-full "
+            className="input input-bordered input-sm w-full "
             {...register("companyname", {
               required: "This field can't be empty",
             })}
@@ -58,7 +58,7 @@ export const JobForm = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-sm input-bordered w-full "
             {...register("jobtitle", {
               required: " This field can't be empty",
             })}
@@ -74,7 +74,7 @@ export const JobForm = () => {
             <span className="label-text">Date Applied</span>
           </div>
           <DatePicker
-            className="input input-bordered w-full "
+            className="input input-sm input-bordered w-full "
             selected={startDate}
             onChange={(date) => setStartDate(date)}
           />
@@ -91,7 +91,7 @@ export const JobForm = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-sm input-bordered w-full "
             {...register("location", {
               required: "This field can't be empty",
             })}
@@ -107,7 +107,7 @@ export const JobForm = () => {
             <span className="label-text">Employment Type</span>
           </div>
           <select
-            className="select select-bordered text-lg"
+            className="select select-sm select-bordered text-sm"
             value={employmenttype}
             onChange={(e) => {
               console.log(e.target.value);
@@ -128,7 +128,7 @@ export const JobForm = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-sm input-bordered w-full "
             {...register("salary", {
               required: "This field can't be empty",
             })}
@@ -145,7 +145,7 @@ export const JobForm = () => {
           </div>
           <input
             type="text"
-            className="input input-bordered w-full "
+            className="input input-sm input-bordered w-full "
             {...register("appliedplatform", {
               required: "This field can't be empty",
             })}

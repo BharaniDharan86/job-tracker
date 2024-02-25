@@ -19,7 +19,7 @@ export const Jobs = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div>
+    <div className="mt-[60px]">
       <JobHeader
         filter={filter}
         setFilter={setFilter}

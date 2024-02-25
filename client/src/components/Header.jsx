@@ -5,7 +5,7 @@ import { Sidebar } from "./Sidebar";
 
 export const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
   return (
-    <div className="navbar bg-base-100 border-b-[1px] border-slate-800 fixed top-0 left-0 h-[40px] mb-[40px]">
+    <div className="navbar bg-base-100 border-b-[1px] z-[20] border-slate-100 fixed top-0 left-0 h-[40px] mb-[40px]">
       <div className="flex-none">
         <button
           className="btn btn-square btn-ghost"
