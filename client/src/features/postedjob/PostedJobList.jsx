@@ -12,9 +12,9 @@ const PostedJobList = () => {
   });
 
   if (isLoading) return <Loader />;
-  console.log(data);
+
   return (
-    <div className="grid  place-items-center w-full grid-cols-[1fr_1fr_1fr] gap-y-10 place-self-center">
+    <div className="grid  place-items-center w-full md:grid-cols-[1fr_1fr_1fr] sm:grid-cols-[1fr_1fr] my-[20px] mx-auto  grid-cols-[1fr] gap-y-10 place-self-center">
       {data.map((job) => {
         return <PostedJobItem key={job._id} job={job} />;
       })}

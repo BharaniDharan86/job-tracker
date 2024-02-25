@@ -5,7 +5,7 @@ import { Modal } from "../ui/Modal";
 const PostedJob = () => {
   return (
     <Modal>
-      <div className="flex items-center justify-between p-5">
+      <div className="flex items-center justify-between p-5 mt-[60px]">
         <h1>PostedJob</h1>
         <Modal.Open name="Post-Job">
           <Button>Post New Job</Button>
