@@ -16,6 +16,8 @@ export default function ViewApplicant({ jobId }) {
   });
 
   if (isLoading) return <Loader />;
+
+  if (data.length === 0) return <p>No Application yet</p>;
   return (
     <div>
       <ApplicantList applicant={data} />

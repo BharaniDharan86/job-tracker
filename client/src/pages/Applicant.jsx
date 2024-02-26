@@ -4,7 +4,7 @@ import ViewApplicant from "../features/applicants/ViewApplicant";
 function Applicant() {
   const { id } = useParams();
   return (
-    <div>
+    <div className="mt-[60px]">
       <ViewApplicant jobId={id} />
     </div>
   );

@@ -50,9 +50,12 @@ export const JobPostForm = () => {
   }
 
   return (
-    <div className="h-[700px] overflow-y-scroll flex border-3 border-red-3 bg-slate-800 flex-col justify-center items-center uppercase w-[680px] font-semibold ">
+    <div className="h-[100%] flex  bg-slate-50 flex-col justify-center  items-center uppercase md:w-[680px] sm:w-[100%] font-semibold ">
       <h1>JobPostForm</h1>
-      <form onSubmit={handleSubmit(submit)}>
+      <form
+        onSubmit={handleSubmit(submit)}
+        className="w-[400px] text-center mx-aut0"
+      >
         <label className="form-control w-full max-w-xs">
           <div className="label">
             <span className="label-text">Whom you're looking for ?</span>

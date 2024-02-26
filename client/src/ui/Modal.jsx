@@ -30,9 +30,9 @@ function Window({ children, name }) {
   if (openName !== name) return null;
 
   return (
-    <div className="fixed top-0 left-0  w-full z-[200] overflow-y-scroll p-3 bg-slate-200/50 backdrop-blur-sm h-svh">
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-50 w-60% p-6">
-        <div className="flex justify-end">
+    <div className="fixed top-0 left-0  w-full z-[200] overflow-y-scroll  bg-slate-200/50 backdrop-blur-sm h-svh">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2   -translate-y-1/2 bg-slate-50 w-60% overflow-y-scroll  mt-[100px] ">
+        <div className="flex justify-end ">
           <Button type="small" rounded="full" onClick={close}>
             <HiMiniXMark />
           </Button>

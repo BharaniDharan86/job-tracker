@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getUser from "../services/apiUser";
 import { useCookies } from "react-cookie";
 import Loader from "../ui/Loader";
+import { NavLink } from "react-router-dom";
 
 export const Profile = () => {
   const [cookie] = useCookies();
@@ -11,15 +12,17 @@ export const Profile = () => {
   });
 
   if (isLoading) return <Loader />;
-
-  console.log(data);
-
-  console.log(data.userimage);
   return (
-    <div>
-      <div>
-        <h1>{data.username}</h1>
-        <img src="user-65da2afb0c9b4e30a8ad6804-1708799018556.jpeg" alt="" />
+    <div className="mt-[60px] flex flex-col justify-center items-center">
+      <div className="text-center">
+        <img src={data.userimage} className="h-30 w-30 rounded-full" />
+        <h1 className="font-bold">{data.username}</h1>
+        <span className="font-semibold">{data.email}</span>
+        <div className="my-4">
+          <button className="bg-blue-700 text-white px-3 py-2 font-semibold">
+            <NavLink to="updateprofile">Update Profile</NavLink>
+          </button>
+        </div>
       </div>
     </div>
   );

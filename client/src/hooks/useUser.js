@@ -6,6 +6,7 @@ export default function useUser(token) {
     queryKey: ["user"],
     queryFn: () => getUser(token),
   });
+  console.log(userData);
 
   return { userData, isUserLoading };
 }

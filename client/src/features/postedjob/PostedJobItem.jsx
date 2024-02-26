@@ -9,7 +9,7 @@ const PostedJobItem = ({ job }) => {
   const postedAt = toReadableDate(createdAt);
 
   return (
-    <div className="w-[400px] p-2">
+    <div className="w-[400px] p-2 pl-4">
       <div className="flex">
         <div className="flex justify-start items-center gap-2">
           <img

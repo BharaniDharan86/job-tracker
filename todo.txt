@@ -1,9 +1,7 @@
 1. UI
    *home page
-   *user - profile
-   
-   *applicant detail page
-   *better job application page
+  
+
 
 
 3.File uploading
@@ -15,3 +13,7 @@
 //*better job detail page
 //2.Error handling in Frontend
 //*jobInfo Posting
+
+ *user - profile
+ *better job application page
+ *applicant detail page

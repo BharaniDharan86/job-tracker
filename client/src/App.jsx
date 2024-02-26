@@ -18,6 +18,7 @@ import { JobPostDetail } from "./pages/JobPostDetail";
 import { Toaster } from "react-hot-toast";
 import Applicant from "./pages/Applicant";
 import PostedJob from "./pages/PostedJob";
+import UpdateProfile from "./pages/UpdateProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
+      },
+      {
+        path: "profile/updateprofile",
+        element: <UpdateProfile />,
       },
       {
         path: "jobdetail/:id",
