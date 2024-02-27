@@ -20,7 +20,12 @@ exports.postJob = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllJob = catchAsync(async (req, res, next) => {
-  const allJobs = await JobInfo.find().populate({
+  const { searchTerm } = req.query;
+  const regex = new RegExp(searchTerm, "i");
+  const query = JobInfo.find({
+    $or: [{ title: { $regex: regex } }, { company: { $regex: regex } }],
+  });
+  const allJobs = await query.populate({
     path: "postedBy",
     select: "username ",
   });
@@ -58,5 +63,14 @@ exports.getJobById = catchAsync(async (req, res, next) => {
     status: "success",
     success: true,
     job,
+  });
+});
+
+exports.searchJob = catchAsync(async (req, res, next) => {
+  const jobs = await JobInfo.find();
+  return res.status(200).json({
+    status: "success",
+    sucess: true,
+    jobs,
   });
 });

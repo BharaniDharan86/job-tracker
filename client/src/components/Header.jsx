@@ -2,8 +2,17 @@
 import { HiUserCircle } from "react-icons/hi2";
 import { HiMiniArrowRightOnRectangle } from "react-icons/hi2";
 import { Sidebar } from "./Sidebar";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 export const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
+  const navigate = useNavigate();
+  const [cookie, setCookie, removeCookie] = useCookies(["access_token"]);
+  function logout() {
+    console.log(cookie);
+    removeCookie("access_token");
+    console.log(cookie);
+    navigate("/login");
+  }
   return (
     <div className="navbar bg-base-100 border-b-[1px] z-[20] border-slate-100 fixed top-0 left-0 h-[40px] mb-[40px]">
       <div className="flex-none">
@@ -31,9 +40,14 @@ export const Header = ({ isSideBarOpen, setIsSideBarOpen }) => {
       </div>
       <div className="flex text-2xl sm:gap-5 gap-4 sm:pr-11 pr-2">
         <button className="">
-          <HiUserCircle />
+          <NavLink
+            to="/app/profile
+          "
+          >
+            <HiUserCircle />
+          </NavLink>
         </button>
-        <button className="">
+        <button className="" onClick={() => logout()}>
           <HiMiniArrowRightOnRectangle />
         </button>
       </div>

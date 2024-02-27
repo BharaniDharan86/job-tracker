@@ -19,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import Applicant from "./pages/Applicant";
 import PostedJob from "./pages/PostedJob";
 import UpdateProfile from "./pages/UpdateProfile";
+
 const router = createBrowserRouter([
   {
     path: "/",

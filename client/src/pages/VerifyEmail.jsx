@@ -29,11 +29,14 @@ const VerifyEmail = () => {
 
   return (
     <div className="flex justify-center items-center h-[90vh] flex-col">
-      <p className="mb-3 text-xl">
+      <p className="mb-3 text-xl md:text-3xl font-semibold text-center">
         Please check your email for the 6-digit verification code and enter it
         below
       </p>
-      <form onSubmit={handleSubmit(submit)} className="flex gap-2 items-center">
+      <form
+        onSubmit={handleSubmit(submit)}
+        className="flex flex-col gap-2 items-center"
+      >
         <input
           type="text"
           placeholder="Enter the 6 digit code"

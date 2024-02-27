@@ -3,21 +3,26 @@ import { getAllJobPost } from "../../services/apiAllJobs";
 import { useCookies } from "react-cookie";
 import Loader from "../../ui/Loader";
 import JobPostList from "./JobPostList";
+import { useState } from "react";
 
 const JobPost = () => {
   const [cookies] = useCookies();
   const token = cookies.access_token;
+  const [searchText, setSearchText] = useState("");
   const { data, isLoading } = useQuery({
-    queryKey: ["alljobs"],
-    queryFn: () => getAllJobPost(token),
+    queryKey: ["alljobs", searchText],
+    queryFn: () => getAllJobPost(token, searchText),
   });
 
-  if (isLoading) return <Loader />;
-
-  const jobPost = data.allJobs;
+  const jobPost = data?.allJobs;
   return (
     <div className="flex justify-center items-center ">
-      <JobPostList jobPost={jobPost} />
+      <JobPostList
+        jobPost={jobPost}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        isLoading={isLoading}
+      />
     </div>
   );
 };

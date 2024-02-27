@@ -2,6 +2,8 @@
 export default function ApplicantList({ applicant }) {
   console.log(applicant);
 
+  if (!applicant) return <p>No Application Yet</p>;
+
   return (
     <div>
       <div className="overflow-x-auto">

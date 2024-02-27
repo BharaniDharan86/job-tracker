@@ -26,8 +26,8 @@ export const Login = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
-      <h1 className="font-bold text-2xl p-3">Welcome Back</h1>
-      <form className="w-[30%]" onSubmit={handleSubmit(submit)}>
+      <h1 className="font-bold text-2xl md:text-4xl  p-3">Login To Continue</h1>
+      <form className="w-[90%] md:w-[30%]" onSubmit={handleSubmit(submit)}>
         <label className="input input-bordered flex items-center bg-none gap-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,13 +77,18 @@ export const Login = () => {
           )}
         </label>
 
-        <Button type="full">Login</Button>
+        <button
+          type="submit"
+          className="bg-blue-700  w-full text-white px-1 py-2 font-semibold my-1"
+        >
+          Login
+        </button>
       </form>
 
       <div className="p-3 text-lg font-medium">
         <p>
           New to CareerSync ?{" "}
-          <NavLink to="/signup" className="underline ml-1">
+          <NavLink to="/verifyemail" className="underline ml-1 text-blue-700">
             Sign Up Now
           </NavLink>{" "}
         </p>

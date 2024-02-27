@@ -1,11 +1,16 @@
-export const getAllJobPost = async (token) => {
-  const response = await fetch("http://localhost:3000/api/v1/jobinfo", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getAllJobPost = async (token, searchText) => {
+  console.log(searchText);
+  const response = await fetch(
+    `http://localhost:3000/api/v1/jobinfo?searchTerm=${searchText}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
   const data = await response.json();
+  console.log(data);
   return data;
 };
 

@@ -53,7 +53,10 @@ export const Sidebar = ({ isSideBarOpen, setIsSideBarOpen }) => {
         </li>
 
         <li className="mb-3 p-2 hover:bg-slate-50 w-full transition-all duration-400 hover:translate-x-1">
-          <NavLink to="/profile" className="flex items-center gap-4 row-gap-4">
+          <NavLink
+            to="/app/profile"
+            className="flex items-center gap-4 row-gap-4"
+          >
             <HiMiniUserCircle />
             Profile
           </NavLink>

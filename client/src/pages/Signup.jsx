@@ -28,7 +28,7 @@ export default function Signup() {
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
       <h1 className="font-bold text-2xl p-3">Create Your Account</h1>
-      <form className="w-[30%]" onSubmit={handleSubmit(submit)}>
+      <form className="w-[90%] sm:w-[45%]" onSubmit={handleSubmit(submit)}>
         <label className="input input-bordered flex items-center gap-2 mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -133,9 +133,12 @@ export default function Signup() {
             <p className="text-red-600">{errors.confirmpassword.message}</p>
           )}
         </label>
-        <Button type="full" disabled={isPending}>
+        <button
+          className="bg-blue-700 rounded-md w-full text-white px-1 py-2 font-semibold my-1"
+          disabled={isPending}
+        >
           Sign Up
-        </Button>
+        </button>
       </form>
       <div className="p-3 text-lg font-medium">
         <p>
