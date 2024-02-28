@@ -4,14 +4,11 @@ import JobPostItem from "./JobPostItem";
 const JobPostList = ({ jobPost, searchText, setSearchText, isLoading }) => {
   return (
     <div className="w-[90%] md:w-[60%] mt-[70px] ">
-      <div
-        className="flex justify-center
-      "
-      >
+      <div className="flex justify-center p-3      ">
         <label className="input input-bordered w-[360px] flex items-center gap-2">
           <input
             type="text"
-            className="grow"
+            className="grow border-stone-900 placeholder:text-stone-900"
             placeholder="Search for company or job title"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}

@@ -1,11 +1,5 @@
-1. UI
-   *home page
-  
-
-
-
+1home page
 3.File uploading
-
 4.Deploy
 
 
