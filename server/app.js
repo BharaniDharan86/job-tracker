@@ -11,11 +11,9 @@ const jobInfoRoutes = require("./routes/jobInfoRouter");
 const applyRouter = require("./routes/applyRouter");
 const AppError = require("./utils/appError");
 const globalErrHandler = require("./controllers/errorController");
-
-// const __dirname = path.resolve();
-
 app.use(express.static(path.join(__dirname, "/client/dist")));
-app.get("*", (req, res, next) => {
+
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 app.use(mongoSanitize());
