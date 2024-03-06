@@ -12,10 +12,14 @@ const applyRouter = require("./routes/applyRouter");
 const AppError = require("./utils/appError");
 const globalErrHandler = require("./controllers/errorController");
 
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 app.use(mongoSanitize());
 app.use(xss());
-
-app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(
   cors({
