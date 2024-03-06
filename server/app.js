@@ -2,13 +2,20 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-
+const path = require("path");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
 const userRouter = require("./routes/userRouter");
 const jobRouter = require("./routes/jobRouter");
 const jobInfoRoutes = require("./routes/jobInfoRouter");
 const applyRouter = require("./routes/applyRouter");
 const AppError = require("./utils/appError");
 const globalErrHandler = require("./controllers/errorController");
+
+app.use(mongoSanitize());
+app.use(xss());
+
+app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(
   cors({
