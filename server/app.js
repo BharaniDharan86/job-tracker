@@ -11,21 +11,18 @@ const jobInfoRoutes = require("./routes/jobInfoRouter");
 const applyRouter = require("./routes/applyRouter");
 const AppError = require("./utils/appError");
 const globalErrHandler = require("./controllers/errorController");
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
-app.use(mongoSanitize());
-app.use(xss());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173", "https://career-sync-app.onrender.com/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
+app.use(mongoSanitize());
+app.use(xss());
+
 app.use(morgan("dev"));
 
 app.use(express.json());

@@ -19,7 +19,7 @@ const Hero = () => {
 
           <div className="my-6">
             <NavLink to="/login">
-              <button className="bg-blue-700 text-xl font-semibold text-white px-3 py-3 ">
+              <button className="bg-black-700 text-xl font-semibold text-white px-3 py-3 ">
                 Login To Continue
               </button>
             </NavLink>
