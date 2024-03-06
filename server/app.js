@@ -12,7 +12,7 @@ const applyRouter = require("./routes/applyRouter");
 const AppError = require("./utils/appError");
 const globalErrHandler = require("./controllers/errorController");
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res, next) => {

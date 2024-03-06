@@ -8,7 +8,7 @@ const MONGODB = process.env.MONGODB_URL;
 mongoose
   .connect(MONGODB)
   .then(() => console.log("Connected Successfully !"))
-  .catch((err) => console.log("Error"));
+  .catch((err) => console.log(err));
 
 const port = process.env.PORT;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Example app listening on port ${3000}!`));
